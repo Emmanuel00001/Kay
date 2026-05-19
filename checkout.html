@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout — Kay</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .page-header {
+            margin-top: 89px;
+            padding: 60px;
+            background: var(--cream);
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-family: var(--font-display);
+            font-size: 48px;
+            font-weight: 300;
+            letter-spacing: -1px;
+        }
+
+        .checkout-wrap {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 60px;
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 60px;
+            align-items: start;
+        }
+
+        .form-section {
+            margin-bottom: 48px;
+        }
+
+        .form-section-title {
+            font-family: var(--font-display);
+            font-size: 24px;
+            font-weight: 500;
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gray);
+        }
+
+        input, select {
+            padding: 14px 16px;
+            border: 1px solid var(--border);
+            background: var(--white);
+            font-family: var(--font-body);
+            font-size: 14px;
+            color: var(--black);
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        input:focus, select:focus {
+            border-color: var(--gold);
+        }
+
+        .payment-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .payment-option {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px 20px;
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+
+        .payment-option:hover,
+        .payment-option.selected {
+            border-color: var(--gold);
+        }
+
+        .payment-option input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--gold);
+            padding: 0;
+            border: none;
+        }
+
+        .payment-option-label {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .payment-option-desc {
+            font-size: 12px;
+            color: var(--gray);
+        }
+
+        .order-summary {
+            background: var(--cream);
+            padding: 40px;
+            position: sticky;
+            top: 110px;
+        }
+
+        .summary-title {
+            font-family: var(--font-display);
+            font-size: 24px;
+            font-weight: 500;
+            margin-bottom: 24px;
+        }
+
+        .summary-item {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .summary-item img {
+            width: 64px;
+            height: 80px;
+            object-fit: cover;
+        }
+
+        .summary-item-name {
+            font-family: var(--font-display);
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+
+        .summary-item-qty {
+            font-size: 12px;
+            color: var(--gray);
+        }
+
+        .summary-item-price {
+            margin-left: auto;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 14px;
+            color: var(--gray);
+        }
+
+        .summary-row.total {
+            font-size: 18px;
+            color: var(--black);
+            font-weight: 500;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+            margin-top: 8px;
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.7);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        .modal {
+            background: var(--white);
+            padding: 60px;
+            max-width: 480px;
+            width: 90%;
+            text-align: center;
+        }
+
+        .modal-icon {
+            font-size: 48px;
+            margin-bottom: 24px;
+        }
+
+        .modal h2 {
+            font-family: var(--font-display);
+            font-size: 32px;
+            font-weight: 400;
+            margin-bottom: 16px;
+        }
+
+        .modal p {
+            font-size: 14px;
+            color: var(--gray);
+            line-height: 1.8;
+            margin-bottom: 32px;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="nav-logo">Kay</a>
+        <ul class="nav-links">
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="shop.html?category=bags">Bags</a></li>
+            <li><a href="shop.html?category=shoes">Shoes</a></li>
+            <li><a href="shop.html?category=purses">Purses</a></li>
+        </ul>
+        <div class="nav-right">
+            <a href="cart.html" class="cart-icon">
+                🛍️
+                <span class="cart-count" style="display:none">0</span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <h1>Checkout</h1>
+    </div>
+
+    <div class="checkout-wrap">
+
+        <div>
+            <div class="form-section">
+                <h2 class="form-section-title">Contact Information</h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>First Name</label>
+                        <input type="text" id="firstName" placeholder="Emmanuel">
+                    </div>
+                    <div class="form-group">
+                        <label>Last Name</label>
+                        <input type="text" id="lastName" placeholder="Akolade">
+                    </div>
+                    <div class="form-group full">
+                        <label>Email Address</label>
+                        <input type="email" id="email" placeholder="you@example.com">
+                    </div>
+                    <div class="form-group full">
+                        <label>Phone Number</label>
+                        <input type="tel" id="phone" placeholder="+234 800 000 0000">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h2 class="form-section-title">Shipping Address</h2>
+                <div class="form-grid">
+                    <div class="form-group full">
+                        <label>Street Address</label>
+                        <input type="text" id="address" placeholder="123 Victoria Island">
+                    </div>
+                    <div class="form-group">
+                        <label>City</label>
+                        <input type="text" id="city" placeholder="Lagos">
+                    </div>
+                    <div class="form-group">
+                        <label>State / Region</label>
+                        <input type="text" id="state" placeholder="Lagos State">
+                    </div>
+                    <div class="form-group full">
+                        <label>Country</label>
+                        <select id="country">
+                            <option value="NG">Nigeria</option>
+                            <option value="GH">Ghana</option>
+                            <option value="ZA">South Africa</option>
+                            <option value="KE">Kenya</option>
+                            <option value="GB">United Kingdom</option>
+                            <option value="IE">Ireland</option>
+                            <option value="US">United States</option>
+                            <option value="CA">Canada</option>
+                            <option value="DE">Germany</option>
+                            <option value="FR">France</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h2 class="form-section-title">Payment Method</h2>
+                <div class="payment-options">
+                    <div class="payment-option selected" onclick="selectPayment(this)">
+                        <input type="radio" name="payment" checked>
+                        <div>
+                            <p class="payment-option-label">💳 Credit / Debit Card</p>
+                            <p class="payment-option-desc">Visa, Mastercard, Verve</p>
+                        </div>
+                    </div>
+                    <div class="payment-option" onclick="selectPayment(this)">
+                        <input type="radio" name="payment">
+                        <div>
+                            <p class="payment-option-label">🏦 Bank Transfer</p>
+                            <p class="payment-option-desc">Direct bank payment</p>
+                        </div>
+                    </div>
+                    <div class="payment-option" onclick="selectPayment(this)">
+                        <input type="radio" name="payment">
+                        <div>
+                            <p class="payment-option-label">📱 Pay on Delivery</p>
+                            <p class="payment-option-desc">Cash or POS on delivery</p>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn-dark" style="width:100%; padding:18px;" onclick="placeOrder()">
+                    Place Order
+                </button>
+            </div>
+        </div>
+
+        <div class="order-summary">
+            <h2 class="summary-title">Your Order</h2>
+            <div id="summaryItems"></div>
+            <div class="summary-row">
+                <span>Subtotal</span>
+                <span id="summarySubtotal"></span>
+            </div>
+            <div class="summary-row">
+                <span>Shipping</span>
+                <span id="summaryShipping"></span>
+            </div>
+            <div class="summary-row total">
+                <span>Total</span>
+                <span id="summaryTotal"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="successModal">
+        <div class="modal">
+            <div class="modal-icon">🎉</div>
+            <h2>Order Placed!</h2>
+            <p>Thank you for shopping with Kay. Your order has been received and will be processed shortly. A confirmation will be sent to your email.</p>
+            <a href="index.html" class="btn btn-dark" onclick="clearCartAndRedirect()">Continue Shopping</a>
+        </div>
+            <script src="js/main.js"></script>
+    <script>
+        function renderSummary() {
+            const cart = getCart();
+            const summaryItems = document.getElementById('summaryItems');
+            const subtotal = getCartTotal();
+            const shipping = subtotal > 200 ? 0 : 15;
+            const total = subtotal + shipping;
+
+            summaryItems.innerHTML = cart.map(item => `
+                <div class="summary-item">
+                    <img src="${item.image}" alt="${item.name}">
+                    <div>
+                        <p class="summary-item-name">${item.name}</p>
+                        <p class="summary-item-qty">Qty: ${item.quantity}</p>
+                    </div>
+                    <p class="summary-item-price" data-price="${item.price * item.quantity}">
+                        €${item.price * item.quantity}
+                    </p>
+                </div>
+            `).join('');
+
+            document.getElementById('summarySubtotal').setAttribute('data-price', subtotal);
+            document.getElementById('summarySubtotal').textContent = '€' + subtotal;
+
+            const shippingEl = document.getElementById('summaryShipping');
+            if (shipping === 0) {
+                shippingEl.textContent = 'Free';
+            } else {
+                shippingEl.setAttribute('data-price', shipping);
+                shippingEl.textContent = '€' + shipping;
+            }
+
+            document.getElementById('summaryTotal').setAttribute('data-price', total);
+            document.getElementById('summaryTotal').textContent = '€' + total;
+
+            detectCurrency();
+        }
+
+        function selectPayment(el) {
+            document.querySelectorAll('.payment-option').forEach(o => {
+                o.classList.remove('selected');
+                o.querySelector('input').checked = false;
+            });
+            el.classList.add('selected');
+            el.querySelector('input').checked = true;
+        }
+
+        function placeOrder() {
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const email = document.getElementById('email').value;
+            const address = document.getElementById('address').value;
+
+            if (!firstName || !lastName || !email || !address) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+
+            document.getElementById('successModal').classList.add('show');
+        }
+
+        function clearCartAndRedirect() {
+            localStorage.removeItem('varenni-cart');
+        }
+
+        renderSummary();
+    </script>
+</body>
+</html>

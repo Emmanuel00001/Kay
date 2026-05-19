@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop — Kay</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .page-header {
+            margin-top: 89px;
+            padding: 80px 60px;
+            background: var(--cream);
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-family: var(--font-display);
+            font-size: 56px;
+            font-weight: 300;
+            letter-spacing: -1px;
+            margin-bottom: 12px;
+        }
+
+        .page-header p {
+            font-size: 14px;
+            color: var(--gray);
+            letter-spacing: 1px;
+        }
+
+        .filters {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            padding: 40px 60px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .filter-btn {
+            padding: 10px 28px;
+            font-family: var(--font-body);
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border: 1px solid var(--border);
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: var(--gray);
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--black);
+            color: var(--white);
+            border-color: var(--black);
+        }
+
+        .shop-wrap {
+            padding: 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .results-count {
+            font-size: 13px;
+            color: var(--gray);
+            margin-bottom: 40px;
+        }
+
+        .shop-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+        }
+
+        .product-card {
+            cursor: pointer;
+        }
+
+        .product-img-wrap {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 3/4;
+            background: var(--cream);
+            margin-bottom: 16px;
+        }
+
+        .product-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-img-wrap img {
+            transform: scale(1.05);
+        }
+
+        .product-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.6));
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover .product-overlay {
+            transform: translateY(0);
+        }
+
+        .product-overlay button {
+            width: 100%;
+        }
+
+        .product-category {
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 6px;
+        }
+
+        .product-name {
+            font-family: var(--font-display);
+            font-size: 18px;
+            font-weight: 500;
+            color: var(--black);
+            margin-bottom: 4px;
+        }
+
+        .product-price {
+            font-size: 14px;
+            color: var(--gray);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 80px;
+            color: var(--gray);
+            grid-column: 1/-1;
+        }
+
+        .empty-state h3 {
+            font-family: var(--font-display);
+            font-size: 28px;
+            font-weight: 400;
+            margin-bottom: 12px;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="nav-logo">Kay</a>
+        <ul class="nav-links">
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="shop.html?category=bags">Bags</a></li>
+            <li><a href="shop.html?category=shoes">Shoes</a></li>
+            <li><a href="shop.html?category=purses">Purses</a></li>
+        </ul>
+        <div class="nav-right">
+            <a href="cart.html" class="cart-icon">
+                🛍️
+                <span class="cart-count" style="display:none">0</span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <h1 id="pageTitle">All Products</h1>
+        <p>Kay's Luxury Collection</p>
+    </div>
+
+    <div class="filters">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="bags">Bags</button>
+        <button class="filter-btn" data-filter="shoes">Shoes</button>
+        <button class="filter-btn" data-filter="purses">Purses</button>
+    </div>
+
+    <div class="shop-wrap">
+        <p class="results-count" id="resultsCount"></p>
+        <div class="shop-grid" id="shopGrid"></div>
+    </div>
+
+    <footer>
+        <div>
+            <p class="footer-logo">Kay</p>
+            <p class="footer-desc">Luxury fashion. Handcrafted with passion, worn with pride.</p>
+        </div>
+        <div>
+            <p class="footer-heading">Shop</p>
+            <ul class="footer-links">
+                <li><a href="shop.html">All Products</a></li>
+                <li><a href="shop.html?category=bags">Bags</a></li>
+                <li><a href="shop.html?category=shoes">Shoes</a></li>
+                <li><a href="shop.html?category=purses">Purses</a></li>
+            </ul>
+        </div>
+        <div>
+            <p class="footer-heading">Information</p>
+            <ul class="footer-links">
+                <li><a href="#">About Kay</a></li>
+                <li><a href="#">Shipping Policy</a></li>
+                <li><a href="#">Returns</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+    </footer>
+    <div class="footer-bottom">
+        © 2026 Kay. All rights reserved. Crafted with passion in Lagos.
+    </div>
+
+    <script src="js/main.js"></script>
+    <script>
+        let currentFilter = 'all';
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const categoryParam = urlParams.get('category');
+
+        if (categoryParam) {
+            currentFilter = categoryParam;
+            document.getElementById('pageTitle').textContent =
+                categoryParam.charAt(0).toUpperCase() + categoryParam.slice(1);
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.filter === categoryParam) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+
+        function renderProducts(filter) {
+            const shopGrid = document.getElementById('shopGrid');
+            const resultsCount = document.getElementById('resultsCount');
+
+            const filtered = filter === 'all'
+                ? products
+                : products.filter(p => p.category === filter);
+
+            resultsCount.textContent = `${filtered.length} pieces`;
+
+            if (filtered.length === 0) {
+                shopGrid.innerHTML = `
+                    <div class="empty-state">
+                        <h3>No products found</h3>
+                        <p>Try a different category</p>
+                    </div>
+                `;
+                return;
+            }
+
+            shopGrid.innerHTML = '';
+            filtered.forEach(product => {
+                shopGrid.innerHTML += `
+                    <div class="product-card" onclick="location.href='product.html?id=${product.id}'">
+                        <div class="product-img-wrap">
+                            <img src="${product.image}" alt="${product.name}">
+                            <div class="product-overlay">
+                                <button class="btn btn-gold" onclick="addToCart({id:${product.id}, name:'${product.name}', price:${product.price}, image:'${product.image}'})">Add to Cart</button>
+                            </div>
+                        </div>
+                        <p class="product-category">${product.category}</p>
+                        <p class="product-name">${product.name}</p>
+                        <p class="product-price" data-price="${product.price}">€${product.price}</p>
+                    </div>
+                `;
+            });
+
+            detectCurrency();
+        }
+
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                currentFilter = this.dataset.filter;
+
+                document.getElementById('pageTitle').textContent =
+                    currentFilter === 'all' ? 'All Products' :
+                    currentFilter.charAt(0).toUpperCase() + currentFilter.slice(1);
+
+                renderProducts(currentFilter);
+            });
+        });
+
+        renderProducts(currentFilter);
+    </script>
+</body>
+</html>

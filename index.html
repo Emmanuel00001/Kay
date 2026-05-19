@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kay Italian Luxury Fashion</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        #hero {
+            height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            margin-top: 0;
+        }
+
+        .hero-left {
+            background: var(--cream);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 120px 80px;
+        }
+
+        .hero-tag {
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 24px;
+        }
+
+        .hero-title {
+            font-family: var(--font-display);
+            font-size: 72px;
+            font-weight: 300;
+            line-height: 1.1;
+            color: var(--black);
+            margin-bottom: 24px;
+            letter-spacing: -1px;
+        }
+
+        .hero-desc {
+            font-size: 15px;
+            color: var(--gray);
+            line-height: 1.8;
+            max-width: 400px;
+            margin-bottom: 40px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+        }
+
+        .hero-right {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-right img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-right::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.1);
+        }
+
+        .marquee-wrap {
+            background: var(--black);
+            padding: 16px 0;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .marquee-track {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+        }
+
+        .marquee-track span {
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin: 0 32px;
+        }
+
+        .marquee-track span.dot {
+            color: rgba(255,255,255,0.3);
+            margin: 0;
+            letter-spacing: 0;
+        }
+
+        @keyframes marquee {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+
+        #featured {
+            padding: 120px 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .featured-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 60px;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+        }
+
+        .product-card {
+            cursor: pointer;
+        }
+
+        .product-img-wrap {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 3/4;
+            background: var(--cream);
+            margin-bottom: 16px;
+        }
+
+        .product-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-img-wrap img {
+            transform: scale(1.05);
+        }
+
+        .product-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.6));
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover .product-overlay {
+            transform: translateY(0);
+        }
+
+        .product-overlay button {
+            width: 100%;
+        }
+
+        .product-category {
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 6px;
+        }
+
+        .product-name {
+            font-family: var(--font-display);
+            font-size: 18px;
+            font-weight: 500;
+            color: var(--black);
+            margin-bottom: 4px;
+        }
+
+        .product-price {
+            font-size: 14px;
+            color: var(--gray);
+        }
+
+        #story {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 600px;
+        }
+
+        .story-img {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .story-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .story-content {
+            background: var(--cream);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 100px 80px;
+        }
+
+        .story-content p {
+            font-size: 15px;
+            color: var(--gray);
+            line-height: 1.9;
+            margin-bottom: 20px;
+        }
+
+        #categories {
+            padding: 120px 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .category-card {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 3/4;
+            cursor: pointer;
+        }
+
+        .category-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .category-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .category-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(transparent 40%, rgba(0,0,0,0.7));
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 32px;
+        }
+
+        .category-name {
+            font-family: var(--font-display);
+            font-size: 28px;
+            font-weight: 400;
+            color: white;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-logo">Kay</div>
+        <ul class="nav-links">
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="shop.html?category=bags">Bags</a></li>
+            <li><a href="shop.html?category=shoes">Shoes</a></li>
+            <li><a href="shop.html?category=purses">Purses</a></li>
+        </ul>
+        <div class="nav-right">
+            <a href="cart.html" class="cart-icon">
+                🛍️
+                <span class="cart-count" style="display:none">0</span>
+            </a>
+        </div>
+    </nav>
+
+    <section id="hero">
+        <div class="hero-left">
+            <p class="hero-tag">New Collection — Milano 2026</p>
+            <h1 class="hero-title">Italian<br>Luxury,<br>Redefined.</h1>
+            <p class="hero-desc">Handcrafted in the heart of Milan. Every piece tells a story of tradition, elegance, and uncompromising quality.</p>
+            <div class="hero-buttons">
+                <a href="shop.html" class="btn btn-dark">Shop Collection</a>
+                <a href="#story" class="btn btn-outline">Our Story</a>
+            </div>
+        </div>
+        <div class="hero-right">
+            <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&q=80" alt="Varenni Hero">
+        </div>
+    </section>
+
+    <div class="marquee-wrap">
+        <div class="marquee-track">
+            <span>Handcrafted in Milan</span><span class="dot">·</span>
+            <span>Free Shipping Over €200</span><span class="dot">·</span>
+            <span>Italian Leather</span><span class="dot">·</span>
+            <span>New Collection 2026</span><span class="dot">·</span>
+            <span>Handcrafted in Milan</span><span class="dot">·</span>
+            <span>Free Shipping Over €200</span><span class="dot">·</span>
+            <span>Italian Leather</span><span class="dot">·</span>
+            <span>New Collection 2026</span><span class="dot">·</span>
+        </div>
+    </div>
+
+    <section id="featured">
+        <div class="featured-header">
+            <div>
+                <p class="section-label">Curated Selection</p>
+                <h2 class="section-title">Featured Pieces</h2>
+            </div>
+            <a href="shop.html" class="btn btn-outline">View All</a>
+        </div>
+        <div class="products-grid" id="featuredGrid"></div>
+    </section>
+
+    <section id="story">
+        <div class="story-img">
+            <img src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=800&q=80" alt="Varenni Story">
+        </div>
+        <div class="story-content">
+            <p class="section-label">Our Heritage</p>
+            <h2 class="section-title">Born in Lagos,<br>Made for the World.</h2>
+            <p>Kay was founded on a single belief that true luxury is not just about what you wear, but how it makes you feel. Every stitch, every cut, every finish is deliberate.</p>
+            <p>Our artisans have been perfecting their craft for generations, using only the finest Italian leathers and materials sourced from the most respected tanneries in Tuscany.</p>
+            <a href="shop.html" class="btn btn-dark" style="margin-top: 16px;">Explore Collection</a>
+        </div>
+    </section>
+
+    <section id="categories">
+        <div style="text-align: center; margin-bottom: 60px;">
+            <p class="section-label">Shop By Category</p>
+            <h2 class="section-title">Find Your Style</h2>
+        </div>
+        <div class="categories-grid">
+            <div class="category-card" onclick="location.href='shop.html?category=bags'">
+                <img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=600&q=80" alt="Bags">
+                <div class="category-overlay">
+                    <p class="category-name">Bags</p>
+                    <a href="shop.html?category=bags" class="btn btn-outline" style="color:white; border-color:white; padding: 10px 24px;">Shop Now</a>
+                </div>
+            </div>
+            <div class="category-card" onclick="location.href='shop.html?category=shoes'">
+                <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=600&q=80" alt="Shoes">
+                <div class="category-overlay">
+                    <p class="category-name">Shoes</p>
+                    <a href="shop.html?category=shoes" class="btn btn-outline" style="color:white; border-color:white; padding: 10px 24px;">Shop Now</a>
+                </div>
+            </div>
+            <div class="category-card" onclick="location.href='shop.html?category=purses'">
+                <img src="https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?w=600&q=80" alt="Purses">
+                <div class="category-overlay">
+                    <p class="category-name">Purses</p>
+                    <a href="shop.html?category=purses" class="btn btn-outline" style="color:white; border-color:white; padding: 10px 24px;">Shop Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="subscribe">
+        <div style="background: var(--black); padding: 100px 60px; text-align: center;">
+            <p class="section-label" style="color: var(--gold);">Stay in the Loop</p>
+            <h2 style="font-family: var(--font-display); font-size: 42px; font-weight: 300; color: var(--white); margin-bottom: 16px; letter-spacing: -1px;">The Latest from Kay</h2>
+            <p style="font-size: 14px; color: rgba(248,245,240,0.5); margin-bottom: 40px; max-width: 480px; margin-left: auto; margin-right: auto; line-height: 1.8;">Be first to discover new collections, exclusive offers and stories from our Milan ateliers.</p>
+            <div style="display: flex; max-width: 480px; margin: 0 auto; gap: 0;">
+                <input type="email" id="subscribeEmail" placeholder="Your email address" style="flex: 1; padding: 16px 24px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); color: var(--white); font-family: var(--font-body); font-size: 14px; outline: none;">
+                <button type="button" class="btn btn-gold" onclick="handleSubscribe()" style="border-radius: 0; white-space: nowrap;">Subscribe</button>
+            </div>
+            <p id="subscribeMsg" style="font-size: 13px; color: var(--gold); margin-top: 16px; display: none;">Thank you for subscribing!</p>
+        </div>
+    </section>
+
+    <style>
+        /* Local styles for locations section */
+        #locations .container { padding: 100px 60px; max-width: 1200px; margin: 0 auto; }
+        #locations .heading { text-align: center; margin-bottom: 60px; }
+        #locations .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+        #locations .card { padding: 40px; border: 1px solid var(--border); text-align: center; }
+        #locations .flag { font-size: 32px; margin-bottom: 16px; }
+        #locations .card h3 { font-family: var(--font-display); font-size: 22px; font-weight: 500; margin-bottom: 12px; }
+        #locations .card p.info { font-size: 13px; color: var(--gray); line-height: 1.8; }
+        #locations .card p.note { margin-top: 16px; font-size: 12px; color: var(--gold); letter-spacing: 1px; }
+        @media (max-width: 900px) { #locations .grid { grid-template-columns: 1fr; } }
+    </style>
+
+    <section id="locations">
+        <div class="container">
+            <div class="heading">
+                <p class="section-label">Find Us</p>
+                <h2 class="section-title">Our Locations</h2>
+            </div>
+            <div class="grid">
+                <div class="card">
+                    <p class="flag">🇮🇹</p>
+                    <h3>Milan, Italy</h3>
+                    <p class="info">Via Montenapoleone 12<br>20121 Milan, Italy<br><br>Mon – Sat: 10am – 7pm<br>Sun: 12pm – 5pm</p>
+                    <p class="note">FLAGSHIP STORE</p>
+                </div>
+                <div class="card">
+                    <p class="flag">🇳🇬</p>
+                    <h3>Lagos, Nigeria</h3>
+                    <p class="info">15 Adeola Odeku Street<br>Victoria Island, Lagos<br><br>Mon – Sat: 10am – 7pm<br>Sun: 12pm – 5pm</p>
+                    <p class="note">WEST AFRICA HUB</p>
+                </div>
+                <div class="card">
+                    <p class="flag">🇮🇪</p>
+                    <h3>Dublin, Ireland</h3>
+                    <p class="info">34 Grafton Street<br>Dublin 2, Ireland<br><br>Mon – Sat: 10am – 7pm<br>Sun: 12pm – 5pm</p>
+                    <p class="note">EUROPE STORE</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div>
+            <p class="footer-logo">Kay</p>
+            <p class="footer-desc">Italian luxury fashion. Handcrafted with passion, worn with pride.</p>
+        </div>
+        <div>
+            <p class="footer-heading">Shop</p>
+            <ul class="footer-links">
+                <li><a href="shop.html">All Products</a></li>
+                <li><a href="shop.html?category=bags">Bags</a></li>
+                <li><a href="shop.html?category=shoes">Shoes</a></li>
+                <li><a href="shop.html?category=purses">Purses</a></li>
+            </ul>
+        </div>
+        <div>
+            <p class="footer-heading">Information</p>
+            <ul class="footer-links">
+                <li><a href="#">About Kay</a></li>
+                <li><a href="#">Shipping Policy</a></li>
+                <li><a href="#">Returns</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+    </footer>
+    <div class="footer-bottom">
+        © 2026 Kay. All rights reserved. Crafted with passion in Lagos.
+    </div>
+
+    <script src="js/main.js"></script>
+    <script>
+        const featuredGrid = document.getElementById('featuredGrid');
+        const featured = products.filter(p => p.featured);
+
+        featured.forEach(product => {
+            featuredGrid.innerHTML += `
+                <div class="product-card" onclick="location.href='product.html?id=${product.id}'">
+                    <div class="product-img-wrap">
+                        <img src="${product.image}" alt="${product.name}">
+                        <div class="product-overlay">
+                            <button class="btn btn-gold" onclick="addToCart({id:${product.id}, name:'${product.name}', price:${product.price}, image:'${product.image}'})">Add to Cart</button>
+                        </div>
+                    </div>
+                    <p class="product-category">${product.category}</p>
+                    <p class="product-name">${product.name}</p>
+                    <p class="product-price" data-price="${product.price}">€${product.price}</p>
+                </div>
+            `;
+        });
+
+        detectCurrency();
+        function handleSubscribe() {
+            const email = document.getElementById('subscribeEmail').value;
+                        if (!email || !email.includes('@')) {
+                            alert('Please enter a valid email address.');
+                            return;
+                        }
+                        document.getElementById('subscribeEmail').value = '';
+                        document.getElementById('subscribeMsg').style.display = 'block';
+                        }
+    </script>
+</body>
+</html>

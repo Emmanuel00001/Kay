@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product — Kay</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .product-wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 140px 60px 100px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: start;
+        }
+
+        .product-img-main {
+            aspect-ratio: 3/4;
+            overflow: hidden;
+            background: var(--cream);
+        }
+
+        .product-img-main img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .product-img-main:hover img {
+            transform: scale(1.03);
+        }
+
+        .product-details {
+            position: sticky;
+            top: 110px;
+        }
+
+        .product-breadcrumb {
+            font-size: 12px;
+            color: var(--gray);
+            letter-spacing: 1px;
+            margin-bottom: 24px;
+        }
+
+        .product-breadcrumb a {
+            color: var(--gold);
+            text-decoration: none;
+        }
+
+        .product-breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .product-category-tag {
+            font-size: 10px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 12px;
+        }
+
+        .product-title {
+            font-family: var(--font-display);
+            font-size: 42px;
+            font-weight: 400;
+            letter-spacing: -0.5px;
+            margin-bottom: 16px;
+            line-height: 1.1;
+        }
+
+        .product-price-tag {
+            font-family: var(--font-display);
+            font-size: 28px;
+            color: var(--black);
+            margin-bottom: 32px;
+        }
+
+        .product-description {
+            font-size: 15px;
+            color: var(--gray);
+            line-height: 1.9;
+            margin-bottom: 32px;
+            padding-bottom: 32px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .option-label {
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gray);
+            margin-bottom: 12px;
+        }
+
+        .color-options {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+
+        .color-btn {
+            padding: 8px 20px;
+            border: 1px solid var(--border);
+            background: transparent;
+            font-family: var(--font-body);
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: var(--black);
+        }
+
+        .color-btn:hover,
+        .color-btn.active {
+            background: var(--black);
+            color: var(--white);
+            border-color: var(--black);
+        }
+
+        .add-to-cart-btn {
+            width: 100%;
+            padding: 18px;
+            margin-bottom: 16px;
+            font-size: 12px;
+            letter-spacing: 2px;
+        }
+
+        .wishlist-btn {
+            width: 100%;
+            padding: 16px;
+            font-size: 12px;
+            letter-spacing: 2px;
+        }
+
+        .product-features {
+            margin-top: 32px;
+            padding-top: 32px;
+            border-top: 1px solid var(--border);
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+            font-size: 13px;
+            color: var(--gray);
+        }
+
+        .feature-icon {
+            font-size: 18px;
+            width: 24px;
+        }
+
+        .related-wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 60px 100px;
+        }
+
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+        }
+
+        .product-card {
+            cursor: pointer;
+        }
+
+        .product-img-wrap {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 3/4;
+            background: var(--cream);
+            margin-bottom: 16px;
+        }
+
+        .product-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .product-card:hover .product-img-wrap img {
+            transform: scale(1.05);
+        }
+
+        .product-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.6));
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover .product-overlay {
+            transform: translateY(0);
+        }
+
+        .product-overlay button { width: 100%; }
+
+        .product-cat {
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 6px;
+        }
+
+        .product-name {
+            font-family: var(--font-display);
+            font-size: 18px;
+            font-weight: 500;
+            color: var(--black);
+            margin-bottom: 4px;
+        }
+
+        .product-price {
+            font-size: 14px;
+            color: var(--gray);
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="nav-logo">Kay</a>
+        <ul class="nav-links">
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="shop.html?category=bags">Bags</a></li>
+            <li><a href="shop.html?category=shoes">Shoes</a></li>
+            <li><a href="shop.html?category=purses">Purses</a></li>
+        </ul>
+        <div class="nav-right">
+            <a href="cart.html" class="cart-icon">
+                🛍️
+                <span class="cart-count" style="display:none">0</span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="product-wrap" id="productWrap"></div>
+
+    <div class="related-wrap">
+        <div style="margin-bottom: 40px;">
+            <p class="section-label">You May Also Like</p>
+            <h2 class="section-title">Related Pieces</h2>
+        </div>
+        <div class="related-grid" id="relatedGrid"></div>
+    </div>
+
+    <footer>
+        <div>
+            <p class="footer-logo">Kay</p>
+            <p class="footer-desc">Italian luxury fashion. Handcrafted with passion, worn with pride.</p>
+        </div>
+        <div>
+            <p class="footer-heading">Shop</p>
+            <ul class="footer-links">
+                <li><a href="shop.html">All Products</a></li>
+                <li><a href="shop.html?category=bags">Bags</a></li>
+                <li><a href="shop.html?category=shoes">Shoes</a></li>
+                <li><a href="shop.html?category=purses">Purses</a></li>
+            </ul>
+        </div>
+        <div>
+            <p class="footer-heading">Information</p>
+            <ul class="footer-links">
+                <li><a href="#">About Varenni</a></li>
+                <li><a href="#">Shipping Policy</a></li>
+                <li><a href="#">Returns</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+    </footer>
+    <div class="footer-bottom">
+        © 2026 Varenni. All rights reserved. Crafted with passion in Lagos.
+    </div>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Get product ID from URL
+        // e.g. product.html?id=1
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = parseInt(urlParams.get('id'));
+
+        const product = products.find(p => p.id === productId);
+
+        if (!product) {
+            document.getElementById('productWrap').innerHTML = `
+                <div style="text-align:center; padding: 100px; grid-column: 1/-1;">
+                    <h2 style="font-family: var(--font-display); font-size: 32px;">Product not found</h2>
+                    <a href="shop.html" class="btn btn-dark" style="margin-top: 24px; display: inline-block;">Back to Shop</a>
+                </div>
+            `;
+        } else {
+            document.title = product.name + ' — Varenni';
+
+            document.getElementById('productWrap').innerHTML = `
+                <div class="product-img-main">
+                    <img src="${product.image}" alt="${product.name}">
+                </div>
+                <div class="product-details">
+                    <p class="product-breadcrumb">
+                        <a href="index.html">Home</a> /
+                        <a href="shop.html">Shop</a> /
+                        <a href="shop.html?category=${product.category}">${product.category.charAt(0).toUpperCase() + product.category.slice(1)}</a> /
+                        ${product.name}
+                    </p>
+                    <p class="product-category-tag">${product.category}</p>
+                    <h1 class="product-title">${product.name}</h1>
+                    <p class="product-price-tag" data-price="${product.price}">€${product.price}</p>
+                    <p class="product-description">${product.description}</p>
+
+                    <p class="option-label">Available Colors</p>
+                    <div class="color-options">
+                        ${product.colors.map((color, i) => `
+                            <button class="color-btn ${i === 0 ? 'active' : ''}"
+                                onclick="selectColor(this)">
+                                ${color}
+                            </button>
+                        `).join('')}
+                    </div>
+
+                    <button class="btn btn-dark add-to-cart-btn"
+                        onclick="addToCart({id:${product.id}, name:'${product.name}', price:${product.price}, image:'${product.image}'})">
+                        Add to Cart
+                    </button>
+                    <button class="btn btn-outline wishlist-btn">♡ Add to Wishlist</button>
+
+                    <div class="product-features">
+                        <div class="feature-item">
+                            <span class="feature-icon">🚚</span>
+                            <span>Free shipping on orders over €200</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">↩️</span>
+                            <span>Free returns within 30 days</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">🇮🇹</span>
+                            <span>Handcrafted in Milan, Italy</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">✨</span>
+                            <span>Authenticity certificate included</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            const related = products
+                .filter(p => p.category === product.category && p.id !== product.id)
+                .slice(0, 4);
+
+            document.getElementById('relatedGrid').innerHTML = related.map(p => `
+                <div class="product-card" onclick="location.href='product.html?id=${p.id}'">
+                    <div class="product-img-wrap">
+                        <img src="${p.image}" alt="${p.name}">
+                        <div class="product-overlay">
+                            <button class="btn btn-gold"
+                                onclick="event.stopPropagation(); addToCart({id:${p.id}, name:'${p.name}', price:${p.price}, image:'${p.image}'})">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                    <p class="product-cat">${p.category}</p>
+                    <p class="product-name">${p.name}</p>
+                    <p class="product-price" data-price="${p.price}">€${p.price}</p>
+                </div>
+            `).join('');
+
+            detectCurrency();
+        }
+
+        function selectColor(btn) {
+            document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        }
+    </script>
+</body>
+</html>
