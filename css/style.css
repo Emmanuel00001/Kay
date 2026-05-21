@@ -229,3 +229,105 @@ footer {
     margin-bottom: 40px;
     letter-spacing: -0.5px;
 }
+
+@media (max-width: 768px) {
+    nav {
+        padding: 16px 24px;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .nav-logo {
+        font-size: 22px;
+    }
+
+    #hero {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+
+    .hero-left {
+        padding: 80px 24px 60px;
+    }
+
+    .hero-right {
+        height: 400px;
+    }
+
+    .section-wrap,
+    #featured,
+    #categories,
+    #locations {
+        padding: 60px 24px;
+    }
+
+    .products-grid,
+    .categories-grid,
+    .related-grid,
+    .shop-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+
+    #story {
+        grid-template-columns: 1fr;
+    }
+
+    .story-content {
+        padding: 60px 24px;
+    }
+
+    .product-wrap {
+        grid-template-columns: 1fr;
+        padding: 100px 24px 60px;
+        gap: 40px;
+    }
+
+    .product-details {
+        position: static;
+    }
+
+    .cart-wrap,
+    .checkout-wrap {
+        grid-template-columns: 1fr;
+        padding: 40px 24px;
+    }
+
+    .order-summary {
+        position: static;
+    }
+
+    footer {
+        grid-template-columns: 1fr;
+        padding: 40px 24px;
+        gap: 32px;
+    }
+
+    .footer-bottom {
+        padding: 20px 24px;
+    }
+
+    #subscribe > div {
+        padding: 60px 24px;
+    }
+
+    #subscribe input,
+    #subscribe button {
+        font-size: 13px;
+    }
+
+    .filters {
+        padding: 24px;
+        flex-wrap: wrap;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-group.full {
+        grid-column: 1;
+    }
+}
