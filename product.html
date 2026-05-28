@@ -226,6 +226,33 @@
             font-size: 14px;
             color: var(--gray);
         }
+
+        @media (max-width: 768px) {
+        .product-img-main {
+            width: 100%;
+            height: 380px;
+            aspect-ratio: unset;
+        }
+
+        .product-img-main img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background: var(--cream);
+        }
+
+        .product-title {
+            font-size: 28px;
+        }
+
+        .product-price-tag {
+            font-size: 22px;
+       }
+
+        .color-options {
+            flex-wrap: wrap;
+        }
+        }
     </style>
 </head>
 <body>

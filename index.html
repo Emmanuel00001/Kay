@@ -263,6 +263,34 @@
             letter-spacing: 1px;
             margin-bottom: 12px;
         }
+
+        @media (max-width: 768px) {
+            .category-name {
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        .category-overlay {
+            padding: 16px;
+        } 
+
+        .category-overlay .btn {
+            padding: 8px 16px;
+            font-size: 10px;
+        }
+
+        .hero-title {
+            font-size: 48px;
+        }
+
+        .hero-buttons {
+            flex-direction: column;
+        }
+
+        .hero-buttons .btn {
+            text-align: center;
+        }
+        }
     </style>
 </head>
 <body>
@@ -379,7 +407,6 @@
     </section>
 
     <style>
-        /* Local styles for locations section */
         #locations .container { padding: 100px 60px; max-width: 1200px; margin: 0 auto; }
         #locations .heading { text-align: center; margin-bottom: 60px; }
         #locations .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }

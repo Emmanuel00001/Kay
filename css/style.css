@@ -330,4 +330,15 @@ footer {
     .form-group.full {
         grid-column: 1;
     }
+    
+    .product-overlay {
+        transform: translateY(0);
+        background: linear-gradient(transparent, rgba(0,0,0,0.5));
+        padding: 12px;
+    }
+
+    .product-overlay .btn {
+        padding: 8px 12px;
+        font-size: 10px;
+    }
 }
